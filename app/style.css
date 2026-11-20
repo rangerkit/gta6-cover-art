@@ -1,12 +1,46 @@
-html, body { margin: 0; height: 100%; background: #f2f0f4; color: #1d1b22; font: 15px/1.4 system-ui, sans-serif; }
-.app { display: flex; gap: 32px; align-items: center; justify-content: center; height: 100%; padding: 24px; box-sizing: border-box; }
-.controls { display: flex; flex-direction: column; gap: 14px; width: 280px; }
-.controls h1 { margin: 0; font-size: 28px; }
-.controls p { margin: 0; color: #5c5866; }
-label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
-input[type=text] { font: inherit; padding: 8px; border: 1px solid #c9c4d1; border-radius: 6px; }
-button { font: inherit; font-weight: 700; padding: 10px; border: 0; border-radius: 6px; background: #1d1b22; color: #fff; cursor: pointer; }
-canvas { width: min(70vh, 60vw); height: min(70vh, 60vw); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); }
-body.shot-cover .controls { display: none; }
+/* Vice Poster Studio — a dusk-neon editor theme. Original styling, written for this entry. */
+:root {
+  --bg: #17101f;
+  --panel: #221628;
+  --panel-2: #2b1b33;
+  --ink: #f6eef7;
+  --muted: #b9a7c2;
+  --line: #43304e;
+  --accent: #ff7a3c;
+  --accent-2: #ff2e88;
+  --accent-3: #22d3ee;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.app { display: flex; gap: 28px; align-items: flex-start; justify-content: center; padding: 22px; }
+.controls { width: 320px; flex: 0 0 320px; display: flex; flex-direction: column; gap: 14px; }
+.controls h1 { margin: 0; font-size: 30px; line-height: 1.05; letter-spacing: -0.5px; font-weight: 900; text-transform: uppercase; }
+.controls h1 span { background: linear-gradient(90deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.tagline { margin: 0; color: var(--muted); }
+fieldset { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px 14px; margin: 0; background: var(--panel); display: flex; flex-direction: column; gap: 10px; }
+legend { font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); padding: 0 6px; }
+label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 13px; }
+input[type="text"], select { font: inherit; padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel-2); color: var(--ink); }
+input[type="range"] { width: 100%; accent-color: var(--accent-2); }
+.file-label { cursor: pointer; }
+.file-label input { cursor: pointer; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+button { font: inherit; font-weight: 700; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel-2); color: var(--ink); cursor: pointer; }
+button:hover { border-color: var(--accent); }
+button.active { background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-color: transparent; color: #fff; }
+button.primary { background: linear-gradient(90deg, var(--accent), var(--accent-2)); border: 0; color: #fff; font-size: 16px; padding: 12px; }
+.hint { margin: 0; font-size: 12.5px; color: var(--muted); font-weight: 400; }
+#status { margin: 0; font-size: 13px; color: var(--accent-3); min-height: 1.2em; }
+.tray { display: flex; gap: 8px; flex-wrap: wrap; min-height: 54px; }
+.tray img { width: 54px; height: 54px; object-fit: cover; border-radius: 8px; border: 2px solid transparent; cursor: pointer; }
+.tray img.selected { border-color: var(--accent-2); }
+.tray .empty { color: var(--muted); font-size: 13px; align-self: center; }
+.stage { flex: 1 1 auto; max-width: 960px; display: flex; flex-direction: column; gap: 10px; align-items: center; padding-top: 6px; }
+.stage canvas { width: 100%; max-width: 960px; height: auto; max-height: calc(100vh - 130px); border-radius: 10px; box-shadow: 0 14px 44px rgba(0, 0, 0, 0.55); cursor: grab; background: #0d0812; }
+.stage canvas:active { cursor: grabbing; }
+.stage-hint { margin: 0; color: var(--muted); font-size: 13px; }
+body.shot-cover .controls, body.shot-cover .stage-hint { display: none; }
 body.shot-cover .app { padding: 0; }
-body.shot-cover canvas { width: 100vw; height: 100vh; box-shadow: none; }
+body.shot-cover .stage { max-width: none; padding: 0; }
+body.shot-cover .stage canvas { width: 100vw; height: 100vh; max-width: none; max-height: none; border-radius: 0; box-shadow: none; }
+@media (max-width: 900px) { .app { flex-direction: column; } .controls { width: 100%; flex-basis: auto; } }

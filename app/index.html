@@ -3,20 +3,70 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Vice Poster Studio — GTA-style cover art maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
+  <section class="controls" aria-label="Cover controls">
+    <h1>Vice Poster <span>Studio</span></h1>
+    <p class="tagline">Turn your photos into a multi-panel poster cover.</p>
+
+    <fieldset>
+      <legend>1 · Photos</legend>
+      <label class="file-label">Add photos from your machine
+        <input id="photo-input" type="file" accept="image/*" multiple>
+      </label>
+      <div id="tray" class="tray" aria-label="Your photos"></div>
+      <p class="hint">Click a photo to put it in the selected panel. Photos never leave your machine.</p>
+      <button id="fill-all" type="button">Use this photo in every panel</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Layout</legend>
+      <div class="row" id="layouts">
+        <button type="button" data-layout="five" class="active">Vice Five</button>
+        <button type="button" data-layout="three">Three Up</button>
+        <button type="button" data-layout="duo">Duo</button>
+        <button type="button" data-layout="hero">Hero</button>
+      </div>
+      <p class="hint">Panel <strong id="panel-label">1</strong> is selected — click the preview to pick another, drag to move the photo, scroll to zoom.</p>
+      <label>Zoom <input id="zoom" type="range" min="1" max="3" step="0.05" value="1"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>3 · Grade</legend>
+      <div class="row" id="grades">
+        <button type="button" data-grade="sunset" class="active">Sunset</button>
+        <button type="button" data-grade="neon">Neon</button>
+        <button type="button" data-grade="dusk">Dusk</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>4 · Words</legend>
+      <label>Caption <input id="caption" type="text" maxlength="32" value="Sunset Heist"></label>
+      <label>Subtitle <input id="subtitle" type="text" maxlength="48" placeholder="optional"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>5 · Export</legend>
+      <label>Post size
+        <select id="size">
+          <option value="1920x1080" selected>1920 × 1080 — landscape</option>
+          <option value="1080x1080">1080 × 1080 — square</option>
+          <option value="1080x1350">1080 × 1350 — portrait</option>
+        </select>
+      </label>
+      <button id="export" type="button" class="primary">Export PNG</button>
+      <p id="status" role="status"></p>
+    </fieldset>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+
+  <section class="stage" aria-label="Cover preview">
+    <canvas id="cover" width="960" height="540" aria-label="The cover preview"></canvas>
+    <p class="stage-hint">Live preview — drag a panel to reposition its photo.</p>
+  </section>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
